@@ -21,7 +21,8 @@
             height: 90vh; /* Adjust height as needed */
             border: none;
         }
-        #input-box {
+/*         Old input box */
+/*         #input-box {
             position: fixed;
             top: 20px;
             left: 10px;
@@ -32,7 +33,27 @@
             border-radius: 10px;
             display: flex; /* Align items horizontally */
             gap: 10px;
-        }
+        } */
+        #input-box {
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    opacity: 1; /* Ensure the input box is initially visible */
+    transition: opacity 0.3s ease; /* Add a transition for smooth hiding */
+}
+
+#input-box.hidden {
+    opacity: 0; /* Make the input box invisible */
+    pointer-events: none; /* Disable pointer events to prevent interaction */
+}
+
         #pdf-input, #folder-input {
             width: 200px;
             padding: 8px;
@@ -63,26 +84,53 @@
         <input type="text" id="pdf-input" placeholder="PDF file name (e.g., fileName.pdf)" />
         <button id="load-button" onclick="loadPDF()">Open PDF</button>
     </div>
-    
+    <div id="input-box" class="hidden">
+    <!-- Input fields and load button -->
+</div>
     <!-- Embedded PDF viewer -->
     <embed id="pdf-viewer" src="" type="application/pdf" />
     
     <script>
-        // Function to load the specified PDF file into the viewer
-        function loadPDF() {
-            const folder = document.getElementById('folder-input').value.trim(); // Get folder name input
-            const pdfFile = document.getElementById('pdf-input').value.trim(); // Get PDF file name input
+        // Function to load the specified PDF file into the viewer OLD 
+        // function loadPDF() {
+        //     const folder = document.getElementById('folder-input').value.trim(); // Get folder name input
+        //     const pdfFile = document.getElementById('pdf-input').value.trim(); // Get PDF file name input
             
-            if (pdfFile) { // Check if PDF file name is provided
-                // Construct the file path based on folder (if provided) and PDF file name
-                const filePath = folder ? `${folder}/${pdfFile}` : pdfFile;
-                const url = `https://siddhnak.github.io/${filePath}`; // Construct URL for PDF file
-                document.getElementById('pdf-viewer').src = url; // Set the PDF viewer source to the constructed URL
-                document.getElementById('input-box').style.display = 'none'; // Hide the input box after loading PDF
-            } else {
-                alert('Please enter a PDF file name.'); // Alert user if PDF file name is not provided
-            }
-        }
+        //     if (pdfFile) { // Check if PDF file name is provided
+        //         // Construct the file path based on folder (if provided) and PDF file name
+        //         const filePath = folder ? `${folder}/${pdfFile}` : pdfFile;
+        //         const url = `https://siddhnak.github.io/${filePath}`; // Construct URL for PDF file
+        //         document.getElementById('pdf-viewer').src = url; // Set the PDF viewer source to the constructed URL
+        //         document.getElementById('input-box').style.display = 'none'; // Hide the input box after loading PDF
+        //     } else {
+        //         alert('Please enter a PDF file name.'); // Alert user if PDF file name is not provided
+        //     }
+        // }
+// NEw
+        function loadPDF() {
+    const folder = document.getElementById('folder-input').value.trim(); // Get folder name input
+    const pdfFile = document.getElementById('pdf-input').value.trim(); // Get PDF file name input
+    
+    if (pdfFile) { // Check if PDF file name is provided
+        const filePath = folder ? `${folder}/${pdfFile}` : pdfFile;
+        const url = `https://siddhnak.github.io/${filePath}`; // Construct URL for PDF file
+        const pdfViewer = document.getElementById('pdf-viewer');
+        
+        pdfViewer.src = url; // Set the PDF viewer source to the constructed URL
+        pdfViewer.style.visibility = 'visible'; // Ensure PDF viewer is visible after loading
+        
+        // Hide the input box after loading
+        const inputBox = document.getElementById('input-box');
+        inputBox.classList.add('hidden'); // Add 'hidden' class to input box for opacity transition
+        
+        // Adjust PDF viewer size to cover the entire visible area
+        pdfViewer.style.width = '100%';
+        pdfViewer.style.height = 'calc(100% - 40px)'; // Adjust height to cover the entire viewport, accounting for input box height
+        
+    } else {
+        alert('Please enter a PDF file name.'); // Alert user if PDF file name is not provided
+    }
+}
 
         // Optionally load PDF from URL parameters when page loads
         const queryString = window.location.search; // Get query string from URL
