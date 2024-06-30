@@ -42,14 +42,17 @@
 </head>
 <body>
     <div id="input-box">
+        <input type="text" id="folder-input" placeholder="Enter folder name" />
         <input type="text" id="pdf-input" placeholder="Enter PDF file name Temee!! (e.g., fileName.pdf)" />
         <button id="load-button" onclick="loadPDF()">Open PDF</button>
     </div>
     <embed id="pdf-viewer" src="" type="application/pdf" />
     <script>
         function loadPDF() {
+            const folder = document.getElementById('folder-input').value;
             const pdfFile = document.getElementById('pdf-input').value;
             if (pdfFile) {
+                const filePath = folder ? `${folder}/${pdfFile}` : pdfFile;
                 document.getElementById('pdf-viewer').src = `https://siddhnak.github.io/${pdfFile}`;
                 document.getElementById('input-box').style.display = 'none'; // Hide the input box
             } else {
@@ -61,9 +64,14 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const pdfFile = urlParams.get('pdf');
+        const folder = urlParams.get('folder');
 
-        if (pdfFile) {
+
+       if (pdfFile) {
             document.getElementById('pdf-input').value = pdfFile;
+            if (folder) {
+                document.getElementById('folder-input').value = folder;
+            }
             loadPDF();
         }
     </script>
