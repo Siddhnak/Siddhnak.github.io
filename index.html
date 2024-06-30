@@ -1,14 +1,4 @@
-Your HTML and CSS look generally good, but I noticed a couple of issues and potential improvements in your code:
 
-1. **HTML Structure**: You have commented out a closing `</div>` tag inside the `<body>`. Make sure to remove the commented-out section properly if it's not intended to be there.
-
-2. **CSS Comment**: The old input box CSS comment seems to have some unintended content. Make sure to remove commented-out portions properly if they are not needed.
-
-3. **Script Logic**: You have both old and new versions of the `loadPDF()` function commented in your script. Ensure that only the necessary version is active and the unnecessary one is removed or properly commented out.
-
-Here’s your revised code with these adjustments:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,10 +106,4 @@ Here’s your revised code with these adjustments:
     </script>
 </body>
 </html>
-```
 
-### Modifications Made:
-- Removed commented-out old input box styles from CSS.
-- Adjusted script variables to avoid conflicts (`pdfFile` and `folder` changed to `pdfFileParam` and `folderParam` respectively in the script to avoid variable name duplication).
-
-These adjustments should help ensure your code runs smoothly without any errors or unnecessary commented-out sections.
