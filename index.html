@@ -10,69 +10,93 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             font-family: Arial, sans-serif;
+            display: flex; /* Center content vertically and horizontally */
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
         }
         #pdf-viewer {
             width: 100%;
-            height: 100vh; /* Full viewport height */
+            height: 90vh; /* Adjust height as needed */
             border: none;
         }
         #input-box {
             position: fixed;
             top: 20px;
             left: 10px;
-            padding: 5px;
-            background: #f0f0f0;
+            padding: 10px;
+            background: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 10;
             border-radius: 10px;
+            display: flex; /* Align items horizontally */
+            gap: 10px;
         }
-        #pdf-input {
-            width: 150px;
-            padding: 5px;
+        #pdf-input, #folder-input {
+            width: 200px;
+            padding: 8px;
             font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
         }
         #load-button {
-/*             width: 100px; */
-            padding: 5px;
+            padding: 8px 15px;
             font-size: 14px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+        }
+        #load-button:hover {
+            background-color: #0056b3; /* Darker background on hover */
         }
     </style>
 </head>
 <body>
+    <!-- Input box for folder name, PDF file name, and load button -->
     <div id="input-box">
-        <input type="text" id="folder-input" placeholder="Enter folder name" />
-        <input type="text" id="pdf-input" placeholder="Enter PDF file name Temee!! (e.g., fileName.pdf)" />
+        <input type="text" id="folder-input" placeholder="Folder name (optional)" />
+        <input type="text" id="pdf-input" placeholder="PDF file name (e.g., fileName.pdf)" />
         <button id="load-button" onclick="loadPDF()">Open PDF</button>
     </div>
+    
+    <!-- Embedded PDF viewer -->
     <embed id="pdf-viewer" src="" type="application/pdf" />
+    
     <script>
+        // Function to load the specified PDF file into the viewer
         function loadPDF() {
-            const folder = document.getElementById('folder-input').value;
-            const pdfFile = document.getElementById('pdf-input').value;
-            if (pdfFile) {
+            const folder = document.getElementById('folder-input').value.trim(); // Get folder name input
+            const pdfFile = document.getElementById('pdf-input').value.trim(); // Get PDF file name input
+            
+            if (pdfFile) { // Check if PDF file name is provided
+                // Construct the file path based on folder (if provided) and PDF file name
                 const filePath = folder ? `${folder}/${pdfFile}` : pdfFile;
-                document.getElementById('pdf-viewer').src = `https://siddhnak.github.io/${pdfFile}`;
-                document.getElementById('input-box').style.display = 'none'; // Hide the input box
+                const url = `https://siddhnak.github.io/${filePath}`; // Construct URL for PDF file
+                document.getElementById('pdf-viewer').src = url; // Set the PDF viewer source to the constructed URL
+                document.getElementById('input-box').style.display = 'none'; // Hide the input box after loading PDF
             } else {
-                alert('Please enter a PDF file name.');
+                alert('Please enter a PDF file name.'); // Alert user if PDF file name is not provided
             }
         }
 
-        // Load PDF if specified in the URL parameters (optional)
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const pdfFile = urlParams.get('pdf');
-        const folder = urlParams.get('folder');
+        // Optionally load PDF from URL parameters when page loads
+        const queryString = window.location.search; // Get query string from URL
+        const urlParams = new URLSearchParams(queryString); // Create URLSearchParams object
+        
+        const pdfFile = urlParams.get('pdf'); // Get 'pdf' parameter value from URL
+        const folder = urlParams.get('folder'); // Get 'folder' parameter value from URL
 
-
-       if (pdfFile) {
-            document.getElementById('pdf-input').value = pdfFile;
-            if (folder) {
-                document.getElementById('folder-input').value = folder;
+        if (pdfFile) { // If 'pdf' parameter is provided in URL
+            document.getElementById('pdf-input').value = pdfFile; // Set PDF file name input value
+            if (folder) { // If 'folder' parameter is also provided
+                document.getElementById('folder-input').value = folder; // Set folder name input value
             }
-            loadPDF();
+            loadPDF(); // Load the specified PDF file
         }
     </script>
 </body>
