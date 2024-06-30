@@ -20,29 +20,29 @@
         }
         #input-box {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 10px;
+            top: 20px;
+            left: 10px;
+            padding: 5px;
             background: #f0f0f0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 10;
         }
         #pdf-input {
-            width: calc(100% - 110px);
-            padding: 10px;
-            font-size: 16px;
+            width: 150px;
+            padding: 5px;
+            font-size: 14px;
         }
         #load-button {
-            width: 100px;
-            padding: 10px;
-            font-size: 16px;
+/*             width: 100px; */
+            padding: 5px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div id="input-box">
-        <input type="text" id="pdf-input" placeholder="Enter PDF file name (e.g., file2.pdf)" />
-        <button id="load-button" onclick="loadPDF()">Load PDF</button>
+        <input type="text" id="pdf-input" placeholder="Enter PDF file name Temee!! (e.g., fileName.pdf)" />
+        <button id="load-button" onclick="loadPDF()">Open PDF</button>
     </div>
     <embed id="pdf-viewer" src="" type="application/pdf" />
     <script>
