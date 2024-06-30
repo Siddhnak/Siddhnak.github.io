@@ -15,7 +15,7 @@
         }
         #pdf-viewer {
             width: 100%;
-            height: calc(100vh - 50px); /* Adjust height for input box */
+            height: 100vh; /* Full viewport height */
             border: none;
         }
         #input-box {
@@ -50,6 +50,7 @@
             const pdfFile = document.getElementById('pdf-input').value;
             if (pdfFile) {
                 document.getElementById('pdf-viewer').src = `https://siddhnak.github.io/${pdfFile}`;
+                document.getElementById('input-box').style.display = 'none'; // Hide the input box
             } else {
                 alert('Please enter a PDF file name.');
             }
