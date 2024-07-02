@@ -26,7 +26,7 @@
             width: calc(100% - 340px); /* Adjust width minus file list width */
             float: left;
             height: calc(100vh - 60px); /* Adjust this value as needed */
-            display: block; /* Initially show PDF container */
+            display: none; /* Initially hide PDF container */
         }
         #pdf-viewer {
             width: 100%;
@@ -52,6 +52,11 @@
 
     <div id="pdf-container">
         <embed id="pdf-viewer" src="" type="application/pdf">
+    </div>
+
+    <div id="input-container" style="margin-top: 20px;">
+        <input type="text" id="file-name-input" placeholder="Paste filename here" style="width: 300px;">
+        <button onclick="loadPDF()">Open PDF</button>
     </div>
 
     <script>
