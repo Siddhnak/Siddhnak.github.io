@@ -15,6 +15,17 @@
         button {
             margin-left: 10px;
         }
+        #pdf-container {
+            margin-top: 20px;
+            display: none;
+            width: 100%;
+            height: calc(100vh - 200px); /* Adjust this value to fit your layout */
+        }
+        #pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -37,7 +48,9 @@
         <button onclick="loadPDF()">Open PDF</button>
     </div>
 
-    <embed id="pdf-viewer" src="" type="application/pdf" width="100%" height="600px" style="margin-top: 20px;">
+    <div id="pdf-container">
+        <embed id="pdf-viewer" src="" type="application/pdf">
+    </div>
 
     <script>
         // File names for each folder
@@ -169,6 +182,7 @@
                 const folder = document.getElementById('folder-select').value;
                 const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
                 document.getElementById('pdf-viewer').src = url;
+                document.getElementById('pdf-container').style.display = 'block'; // Show the PDF container
             } else {
                 alert('Please paste a filename to open.');
             }
