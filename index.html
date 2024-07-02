@@ -12,53 +12,8 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .copy-button {
+        button {
             margin-left: 10px;
-            padding: 5px 10px;
-            font-size: 14px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .copy-button:hover {
-            background-color: #0056b3;
-        }
-        #paste-container {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #pdf-input {
-            width: 300px;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-        }
-        #load-button {
-            padding: 8px 15px;
-            font-size: 14px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        #load-button:hover {
-            background-color: #0056b3;
-        }
-        #pdf-viewer {
-            width: 100%;
-            height: 90vh;
-            border: none;
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -70,7 +25,6 @@
             <option value="BendJava">BendJava</option>
             <option value="Dbms">Dbms</option>
             <option value="Dhamma">Dhamma</option>
-            <!-- Add more options as needed -->
         </select>
     </div>
 
@@ -78,12 +32,12 @@
         <!-- File names will be displayed here -->
     </div>
 
-    <div id="paste-container">
-        <input type="text" id="pdf-input" placeholder="Paste filename here" />
-        <button id="load-button" onclick="loadPDF()">Open PDF</button>
+    <div id="input-container" style="margin-top: 20px;">
+        <input type="text" id="file-name-input" placeholder="Paste filename here" style="width: 300px;">
+        <button onclick="loadPDF()">Open PDF</button>
     </div>
 
-    <embed id="pdf-viewer" src="" type="application/pdf" />
+    <embed id="pdf-viewer" src="" type="application/pdf" width="100%" height="600px" style="margin-top: 20px;">
 
     <script>
         // File names for each folder
@@ -185,7 +139,6 @@
 
                     // Copy button
                     const copyButton = document.createElement('button');
-                    copyButton.classList.add('copy-button');
                     copyButton.textContent = 'Copy';
                     copyButton.onclick = function() {
                         copyToClipboard(fileName);
@@ -211,12 +164,13 @@
         }
 
         function loadPDF() {
-            const pdfFile = document.getElementById('pdf-input').value.trim();
+            const pdfFile = document.getElementById('file-name-input').value.trim();
             if (pdfFile) {
-                const url = `https://siddhnak.github.io/${pdfFile}`;
+                const folder = document.getElementById('folder-select').value;
+                const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
                 document.getElementById('pdf-viewer').src = url;
             } else {
-                alert('Please enter a PDF file name.');
+                alert('Please paste a filename to open.');
             }
         }
     </script>
