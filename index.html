@@ -33,7 +33,7 @@
             display: flex; /* Align items horizontally */
             gap: 10px;
         }
-        #pdf-input, #folder-input {
+        #folder-select, #pdf-select {
             width: 200px;
             padding: 8px;
             font-size: 14px;
@@ -57,10 +57,16 @@
     </style>
 </head>
 <body>
-    <!-- Input box for folder name, PDF file name, and load button -->
+    <!-- Input box for folder selection, PDF file selection, and load button -->
     <div id="input-box">
-        <input type="text" id="folder-input" placeholder="Folder name (optional)" />
-        <input type="text" id="pdf-input" placeholder="PDF file name (e.g., fileName.pdf)" />
+        <select id="folder-select" onchange="updatePDFList()">
+            <option value="">Select a folder</option>
+            <!-- Options will be populated dynamically -->
+        </select>
+        <select id="pdf-select" onchange="selectPDF()">
+            <option value="">Select a PDF file</option>
+            <!-- Options will be populated dynamically -->
+        </select>
         <button id="load-button" onclick="loadPDF()">Open PDF</button>
     </div>
     
@@ -68,36 +74,62 @@
     <embed id="pdf-viewer" src="" type="application/pdf" />
     
     <script>
-        // Function to load the specified PDF file into the viewer
+        // Function to update the list of PDF files when a folder is selected
+        function updatePDFList() {
+            const selectedFolder = document.getElementById('folder-select').value;
+
+            // Fetch the list of PDF files for the selected folder
+            fetch(`https://example.com/api/getFiles?folder=${selectedFolder}`)
+                .then(response => response.json())
+                .then(data => {
+                    const pdfSelect = document.getElementById('pdf-select');
+                    pdfSelect.innerHTML = '<option value="">Select a PDF file</option>'; // Reset options
+
+                    data.forEach(pdfFile => {
+                        const option = document.createElement('option');
+                        option.value = pdfFile.fileName; // Assuming each object in data has a fileName property
+                        option.textContent = pdfFile.fileName;
+                        pdfSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching PDF files:', error));
+        }
+
+        // Function to load the selected PDF file into the viewer
         function loadPDF() {
-            const folder = document.getElementById('folder-input').value.trim(); // Get folder name input
-            const pdfFile = document.getElementById('pdf-input').value.trim(); // Get PDF file name input
-            
-            if (pdfFile) { // Check if PDF file name is provided
-                // Construct the file path based on folder (if provided) and PDF file name
-                const filePath = folder ? `${folder}/${pdfFile}` : pdfFile;
-                const url = `https://siddhnak.github.io/${filePath}`; // Construct URL for PDF file
-                document.getElementById('pdf-viewer').src = url; // Set the PDF viewer source to the constructed URL
-                document.getElementById('input-box').style.display = 'none'; // Hide the input box after loading PDF
+            const selectedFolder = document.getElementById('folder-select').value;
+            const selectedPDF = document.getElementById('pdf-select').value;
+
+            if (selectedPDF) {
+                const filePath = selectedFolder ? `${selectedFolder}/${selectedPDF}` : selectedPDF;
+                const url = `https://example.com/${filePath}`;
+                document.getElementById('pdf-viewer').src = url;
+                document.getElementById('input-box').style.display = 'none';
             } else {
-                alert('Please enter a PDF file name.'); // Alert user if PDF file name is not provided
+                alert('Please select a PDF file.');
             }
         }
 
-        // Optionally load PDF from URL parameters when page loads
-        const queryString = window.location.search; // Get query string from URL
-        const urlParams = new URLSearchParams(queryString); // Create URLSearchParams object
-        
-        const pdfFile = urlParams.get('pdf'); // Get 'pdf' parameter value from URL
-        const folder = urlParams.get('folder'); // Get 'folder' parameter value from URL
-
-        if (pdfFile) { // If 'pdf' parameter is provided in URL
-            document.getElementById('pdf-input').value = pdfFile; // Set PDF file name input value
-            if (folder) { // If 'folder' parameter is also provided
-                document.getElementById('folder-input').value = folder; // Set folder name input value
-            }
-            loadPDF(); // Load the specified PDF file
+        // Optional: Function to pre-select PDF file based on URL parameters
+        function selectPDF() {
+            // Implement as needed based on your URL parameter handling logic
         }
+
+        // Optional: Populate initial folders when page loads
+        fetch(`https://example.com/api/getFolders`)
+            .then(response => response.json())
+            .then(data => {
+                const folderSelect = document.getElementById('folder-select');
+                folderSelect.innerHTML = '<option value="">Select a folder</option>'; // Reset options
+
+                data.forEach(folder => {
+                    const option = document.createElement('option');
+                    option.value = folder.folderName; // Assuming each object in data has a folderName property
+                    option.textContent = folder.folderName;
+                    folderSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching folders:', error));
     </script>
 </body>
 </html>
