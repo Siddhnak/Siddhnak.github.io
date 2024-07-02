@@ -181,17 +181,21 @@
         }
 
         function loadPDF() {
-            const pdfFile = document.getElementById('file-name-input').value.trim();
-            const folder = document.getElementById('folder-select').value;
-            if (pdfFile) {
-                const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
-                document.getElementById('pdf-viewer').src = url;
-                document.getElementById('pdf-container').style.display = 'block'; // Show the PDF container
-                document.getElementById('file-list-container').style.display = 'none'; // Hide the file list
-            } else {
-                alert('Please paste a filename to open.');
-            }
-        }
+    const pdfFile = document.getElementById('file-name-input').value.trim();
+    const folder = document.getElementById('folder-select').value;
+    
+    if (pdfFile) {
+        const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
+        document.getElementById('pdf-viewer').src = url;
+        document.getElementById('pdf-container').style.display = 'block'; // Show the PDF container
+        
+        // Hide input box and button
+        document.getElementById('input-container').style.display = 'none';
+    } else {
+        alert('Please paste a filename to open.');
+    }
+}
+
     </script>
 </body>
 </html>
