@@ -11,16 +11,22 @@
             background-color: #f0f0f0;
             border: 1px solid #ccc;
             border-radius: 5px;
-            display: none; /* Hide file list initially */
+            display: block; /* Initially show file list */
+            width: 300px; /* Adjust width as needed */
+            float: left;
+            margin-right: 20px;
+            height: calc(100vh - 60px); /* Adjust this value as needed */
+            overflow-y: auto; /* Enable scrolling if list exceeds height */
         }
         button {
             margin-left: 10px;
         }
         #pdf-container {
             margin-top: 20px;
-            width: 100%;
-            height: calc(100vh - 80px); /* Adjust this value as needed */
-            display: none; /* Hide PDF container initially */
+            width: calc(100% - 340px); /* Adjust width minus file list width */
+            float: left;
+            height: calc(100vh - 60px); /* Adjust this value as needed */
+            display: block; /* Initially show PDF container */
         }
         #pdf-viewer {
             width: 100%;
@@ -42,11 +48,6 @@
 
     <div class="file-list" id="file-list-container">
         <!-- File names will be displayed here -->
-    </div>
-
-    <div id="input-container" style="margin-top: 20px;">
-        <input type="text" id="file-name-input" placeholder="Paste filename here" style="width: 300px;">
-        <button onclick="loadPDF()">Open PDF</button>
     </div>
 
     <div id="pdf-container">
@@ -135,13 +136,7 @@
 
             if (selectedFolder && fileNames[selectedFolder]) {
                 const files = fileNames[selectedFolder];
-                const fileListElement = document.createElement('div');
-                fileListElement.classList.add('file-list');
                 
-                const heading = document.createElement('h3');
-                heading.textContent = `Files in ${selectedFolder}:`;
-                fileListElement.appendChild(heading);
-
                 const ul = document.createElement('ul');
                 files.forEach(fileName => {
                     const li = document.createElement('li');
@@ -162,12 +157,11 @@
                     ul.appendChild(li);
                 });
 
-                fileListElement.appendChild(ul);
-                fileListContainer.appendChild(fileListElement);
+                fileListContainer.appendChild(ul);
 
-                // Hide file list and show PDF container
-                fileListContainer.style.display = 'none';
-                document.getElementById('pdf-container').style.display = 'block';
+                // Show file list and hide PDF container
+                fileListContainer.style.display = 'block';
+                document.getElementById('pdf-container').style.display = 'none';
             }
         }
 
