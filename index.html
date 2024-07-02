@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Filenames Example</title>
+    <title>Show Filenames and PDF Viewer</title>
     <style>
         .file-list {
             margin-top: 10px;
@@ -11,15 +11,16 @@
             background-color: #f0f0f0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            display: none; /* Hide file list initially */
         }
         button {
             margin-left: 10px;
         }
         #pdf-container {
             margin-top: 20px;
-            display: none;
             width: 100%;
-            height: calc(100vh - 200px); /* Adjust this value to fit your layout */
+            height: calc(100vh - 80px); /* Adjust this value as needed */
+            display: none; /* Hide PDF container initially */
         }
         #pdf-viewer {
             width: 100%;
@@ -39,7 +40,7 @@
         </select>
     </div>
 
-    <div id="file-list-container">
+    <div class="file-list" id="file-list-container">
         <!-- File names will be displayed here -->
     </div>
 
@@ -163,6 +164,10 @@
 
                 fileListElement.appendChild(ul);
                 fileListContainer.appendChild(fileListElement);
+
+                // Hide file list and show PDF container
+                fileListContainer.style.display = 'none';
+                document.getElementById('pdf-container').style.display = 'block';
             }
         }
 
@@ -178,11 +183,12 @@
 
         function loadPDF() {
             const pdfFile = document.getElementById('file-name-input').value.trim();
+            const folder = document.getElementById('folder-select').value;
             if (pdfFile) {
-                const folder = document.getElementById('folder-select').value;
                 const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
                 document.getElementById('pdf-viewer').src = url;
                 document.getElementById('pdf-container').style.display = 'block'; // Show the PDF container
+                document.getElementById('file-list-container').style.display = 'none'; // Hide the file list
             } else {
                 alert('Please paste a filename to open.');
             }
