@@ -33,120 +33,126 @@
     <script>
         // File names for each folder
         const fileNames = {
-            'BendJava': ['(How to Program) Paul Deitel, Harvey Deitel-Java How to Program, Early Objects-Pearson Education (2015) copy.pdf'
-,'[JAVA][Java Programming Interviews Exposed].pdf'
-,'2. Core_Java_for_the_Impatient_proglib.pdf'
-,'240 core java
-,'Complete Java Resources.pdf'
-,'Compref12.pdf'
-,'Copy of Core java complete notes-1-75.pdf'
-,'Copy of Core java complete notes-76-150.pdf'
-,'Copy of Core java complete notes-151-251.pdf'
-,'Copy of Core java complete notes-251-300.pdf'
-,'Copy of Core java complete notes-301-400.pdf'
-,'Copy of Core java complete notes-401-516.pdf'
-,'Core Java SE 9 for the Impatient, 2nd Edition.pdf'
-,'corejavainterviewques.pdf'
-,'Educative IO Interactive java.pdf'
-,'EffectiveJava3rdEdition.pdf'
-,'Full_Stack_Development_With_Spring_Boot_And_React_Build_Modern_And.pdf'
-,'high-performance-java-persistence-sample.pdf'
-,'Interview.pdf'
-,'Java How to Program 11th Early Objects.pdf'
-,'Java+Concepts+3rd+3E+Cay+Horstmann.pdf'
-,'JavaInterviewQuestions-UdemyCourse.pdf'
-,'JavaNotesForProfessionals.pdf'
-,'JavaPerf.pdf'
-,'Khattry U. - Java SE 11 Programmer I -1Z0-815 - 2019.pdf'
-,'Learn Java with Projects by Maaike van Putten_annotated_14.6_pdf'.pdf'
-,'sample.txt
-,'Sierra K., Bates B. - OCA OCP Java SE 7 Programmer I & II Study Guide - 2015.pdf'
-,'Spring.in.Action.6th.Edition.Craig.Walls.Manning.9781617297571.EBooksWorld.ir_compressed.pdf'
-,'Top_1000_Java_Interview_Questions_Includes_Spring,_Hibernate,_Microservices (2).pdf'],
-            'Dbms': ['1 in all sql.pdf',
-,'800+ SQL Server Interview Questions .pdf',
-,'Database Management System E_Book_Final (1).pdf',
-,'DBMS-File 1-pages-1.pdf',
-,'DBMS-File 1-pages-2.pdf',
-,'DBMS-File 1-pages-3.pdf',
-,'DBMS-File 1-pages-4.pdf',
-,'DBMS-File 1-pages-5.pdf',
-,'DBMS-File 1-pages-6.pdf',
-,'DBMS-File 1-pages-7.pdf',
-,'DBMS-File 1-pages-8.pdf',
-,'DBMS-File 2-pages-1.pdf',
-,'DBMS-File 2-pages-2.pdf',
-,'DBMS-File 2-pages-3.pdf',
-,'DBMS-File 2-pages-4.pdf',
-,'DBMS-File 2-pages-5.pdf',
-,'Gate smashers dbms.pdf',
-,'sams_teach_yourself_sql_in_24_hours_5th_edition.pdf',
-,'SQL All-In-One For Dummies.pdf',
-,'SQL Cheatsheet .pdf',
-,'SQL Interview Questions 📕.pdf',
-,'SQL Java_Durgesh.pdf',
-,'sql notes(By stackoverflow).pdf',
-,'SQL ZERO TO HERO .pdf',
-,'SQL_EXCLUSIVE_NOTES_1653820833.pdf',
-,'Sql_java_Apna college.pdf'],
-            'Dhamma': [''Ajahn Brahm_Opening-The-Doors-Of-Your-Heart.pdf',
-,'Ajahn_Brahm_wisdom_of_silence.pdf',
-,'Art of Dying by S. N. Goenka (z-lib.org).pdf',
-,'sample.txt
-,'who_was_shivaji.pdf',
-,'कबीर के दोहे-1.pdf',
-,'शेतकर्याचा_आसूड_महात्मा_फुले.pdf',
-,'सार्वजनिक_सत्य_धर्म_महात्मा_फुले.pdf']
+            'BendJava': [
+                '(How to Program) Paul Deitel, Harvey Deitel-Java How to Program, Early Objects-Pearson Education (2015) copy.pdf',
+                '[JAVA][Java Programming Interviews Exposed].pdf',
+                '2. Core_Java_for_the_Impatient_proglib.pdf',
+                '240 core java',
+                'Complete Java Resources.pdf',
+                'Compref12.pdf',
+                'Copy of Core java complete notes-1-75.pdf',
+                'Copy of Core java complete notes-76-150.pdf',
+                'Copy of Core java complete notes-151-251.pdf',
+                'Copy of Core java complete notes-251-300.pdf',
+                'Copy of Core java complete notes-301-400.pdf',
+                'Copy of Core java complete notes-401-516.pdf',
+                'Core Java SE 9 for the Impatient, 2nd Edition.pdf',
+                'corejavainterviewques.pdf',
+                'Educative IO Interactive java.pdf',
+                'EffectiveJava3rdEdition.pdf',
+                'Full_Stack_Development_With_Spring_Boot_And_React_Build_Modern_And.pdf',
+                'high-performance-java-persistence-sample.pdf',
+                'Interview.pdf',
+                'Java How to Program 11th Early Objects.pdf',
+                'Java+Concepts+3rd+3E+Cay+Horstmann.pdf',
+                'JavaInterviewQuestions-UdemyCourse.pdf',
+                'JavaNotesForProfessionals.pdf',
+                'JavaPerf.pdf',
+                'Khattry U. - Java SE 11 Programmer I -1Z0-815 - 2019.pdf',
+                'Learn Java with Projects by Maaike van Putten_annotated_14.6_pdf.pdf',
+                'sample.txt',
+                'Sierra K., Bates B. - OCA OCP Java SE 7 Programmer I & II Study Guide - 2015.pdf',
+                'Spring.in.Action.6th.Edition.Craig.Walls.Manning.9781617297571.EBooksWorld.ir_compressed.pdf',
+                'Top_1000_Java_Interview_Questions_Includes_Spring,_Hibernate,_Microservices (2).pdf'
+            ],
+            'Dbms': [
+                '1 in all sql.pdf',
+                '800+ SQL Server Interview Questions .pdf',
+                'Database Management System E_Book_Final (1).pdf',
+                'DBMS-File 1-pages-1.pdf',
+                'DBMS-File 1-pages-2.pdf',
+                'DBMS-File 1-pages-3.pdf',
+                'DBMS-File 1-pages-4.pdf',
+                'DBMS-File 1-pages-5.pdf',
+                'DBMS-File 1-pages-6.pdf',
+                'DBMS-File 1-pages-7.pdf',
+                'DBMS-File 1-pages-8.pdf',
+                'DBMS-File 2-pages-1.pdf',
+                'DBMS-File 2-pages-2.pdf',
+                'DBMS-File 2-pages-3.pdf',
+                'DBMS-File 2-pages-4.pdf',
+                'DBMS-File 2-pages-5.pdf',
+                'Gate smashers dbms.pdf',
+                'sams_teach_yourself_sql_in_24_hours_5th_edition.pdf',
+                'SQL All-In-One For Dummies.pdf',
+                'SQL Cheatsheet .pdf',
+                'SQL Interview Questions 📕.pdf',
+                'SQL Java_Durgesh.pdf',
+                'sql notes(By stackoverflow).pdf',
+                'SQL ZERO TO HERO .pdf',
+                'SQL_EXCLUSIVE_NOTES_1653820833.pdf',
+                'Sql_java_Apna college.pdf'
+            ],
+            'Dhamma': [
+                'Ajahn Brahm_Opening-The-Doors-Of-Your-Heart.pdf',
+                'Ajahn_Brahm_wisdom_of_silence.pdf',
+                'Art of Dying by S. N. Goenka (z-lib.org).pdf',
+                'sample.txt',
+                'who_was_shivaji.pdf',
+                'कबीर के दोहे-1.pdf',
+                'शेतकर्याचा_आसूड_महात्मा_फुले.pdf',
+                'सार्वजनिक_सत्य_धर्म_महात्मा_फुले.pdf'
+            ]
         };
 
-function showFileNames() {
-    const selectedFolder = document.getElementById('folder-select').value;
-    const fileListContainer = document.getElementById('file-list-container');
-    fileListContainer.innerHTML = ''; // Clear previous content
+        function showFileNames() {
+            const selectedFolder = document.getElementById('folder-select').value;
+            const fileListContainer = document.getElementById('file-list-container');
+            fileListContainer.innerHTML = ''; // Clear previous content
 
-    if (selectedFolder && fileNames[selectedFolder]) {
-        const files = fileNames[selectedFolder];
-        const fileListElement = document.createElement('div');
-        fileListElement.classList.add('file-list');
-        
-        const heading = document.createElement('h3');
-        heading.textContent = `Files in ${selectedFolder}:`;
-        fileListElement.appendChild(heading);
+            if (selectedFolder && fileNames[selectedFolder]) {
+                const files = fileNames[selectedFolder];
+                const fileListElement = document.createElement('div');
+                fileListElement.classList.add('file-list');
+                
+                const heading = document.createElement('h3');
+                heading.textContent = `Files in ${selectedFolder}:`;
+                fileListElement.appendChild(heading);
 
-        const ul = document.createElement('ul');
-        files.forEach(fileName => {
-            const li = document.createElement('li');
+                const ul = document.createElement('ul');
+                files.forEach(fileName => {
+                    const li = document.createElement('li');
 
-            // Filename text
-            const fileNameText = document.createElement('span');
-            fileNameText.textContent = fileName;
-            li.appendChild(fileNameText);
+                    // Filename text
+                    const fileNameText = document.createElement('span');
+                    fileNameText.textContent = fileName;
+                    li.appendChild(fileNameText);
 
-            // Copy button
-            const copyButton = document.createElement('button');
-            copyButton.textContent = 'Copy';
-            copyButton.onclick = function() {
-                copyToClipboard(fileName);
-            };
-            li.appendChild(copyButton);
+                    // Copy button
+                    const copyButton = document.createElement('button');
+                    copyButton.textContent = 'Copy';
+                    copyButton.onclick = function() {
+                        copyToClipboard(fileName);
+                    };
+                    li.appendChild(copyButton);
 
-            ul.appendChild(li);
-        });
+                    ul.appendChild(li);
+                });
 
-        fileListElement.appendChild(ul);
-        fileListContainer.appendChild(fileListElement);
-    }
-}
+                fileListElement.appendChild(ul);
+                fileListContainer.appendChild(fileListElement);
+            }
+        }
 
-function copyToClipboard(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    alert(`Copied: ${text}`);
-}
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert(`Copied: ${text}`);
+        }
     </script>
 </body>
 </html>
