@@ -3,39 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Filenames and PDF Viewer</title>
+    <title>Show Filenames Example</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:600" rel="stylesheet">
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #222;
+            color: white;
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', 'Twemoji', sans-serif;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .rotating-text {
+            font-weight: 600;
+            font-size: 36px;
+            color: white;
+            transform: translateX(-80px);
+        }
+
+        .rotating-text p {
+            display: inline-flex;
+            margin: 0;
+            vertical-align: top;
+        }
+
+        .rotating-text .word {
+            position: absolute;
+            display: flex;
+            opacity: 0;
+        }
+
+        .rotating-text .letter {
+            transform-origin: center center 25px;
+        }
+
+        .rotating-text .letter.out {
+            transform: rotateX(90deg);
+            transition: 0.32s cubic-bezier(0.6, 0, 0.7, 0.2);
+        }
+
+        .rotating-text .letter.in {
+            transition: 0.38s ease;
+        }
+
+        .rotating-text .letter.behind {
+            transform: rotateX(-90deg);
+        }
+
+        .alizarin { color: #e74c3c; }
+        .wisteria { color: #8e44ad; }
+        .peter-river { color: #3498db; }
+        .emerald { color: #2ecc71; }
+        .sun-flower { color: #f1c40f; }
+
+        .lw { font-size: 60px; }
+
         .file-list {
             margin-top: 10px;
             padding: 10px;
             background-color: #f0f0f0;
             border: 1px solid #ccc;
             border-radius: 5px;
-            display: block; /* Initially show file list */
-            width: 300px; /* Adjust width as needed */
-            float: left;
-            margin-right: 20px;
-            height: calc(100vh - 60px); /* Adjust this value as needed */
-            overflow-y: auto; /* Enable scrolling if list exceeds height */
+            color: black;
         }
+
         button {
             margin-left: 10px;
         }
-        #pdf-container {
-            margin-top: 20px;
-            width: calc(100% - 340px); /* Adjust width minus file list width */
-            float: left;
-            height: calc(100vh - 60px); /* Adjust this value as needed */
-            display: none; /* Initially hide PDF container */
-        }
-        #pdf-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
+
+        .header-container img {
+            max-height: 350px;
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
+    <div class="header-container">
+        <div class="rotating-text">
+            <p>✒BE like Baba..BE</p>
+            <p>
+                <span class="word alizarin">Perseverant.</span>
+                <span class="word wisteria">Determined.</span>
+                <span class="word peter-river">Courageous.</span>
+                <span class="word emerald">Visionary.</span>
+                <span class="word wisteria">a Bomb Hydrogen.</span>
+                <span class="word sun-flower">Innovative.</span>
+                <span class="word alizarin">Diligent.</span>
+                <span class="word peter-river">Knowledgeable.</span>
+            </p>
+        </div>
+        <img src="https://qph.cf2.quoracdn.net/main-qimg-718b808384e86ef65fc8af3ee1ad70ad-lq" alt="Baba Image">
+    </div>
+
     <div>
         <label for="folder-select">Select a folder:</label>
         <select id="folder-select" onchange="showFileNames()">
@@ -46,12 +114,8 @@
         </select>
     </div>
 
-    <div class="file-list" id="file-list-container">
+    <div id="file-list-container">
         <!-- File names will be displayed here -->
-    </div>
-
-    <div id="pdf-container">
-        <embed id="pdf-viewer" src="" type="application/pdf">
     </div>
 
     <div id="input-container" style="margin-top: 20px;">
@@ -59,8 +123,11 @@
         <button onclick="loadPDF()">Open PDF</button>
     </div>
 
+    <div id="pdf-container" style="display: none;">
+        <embed id="pdf-viewer" src="" type="application/pdf" width="100%" height="900px" style="margin-top: 20px;">
+    </div>
+
     <script>
-        // File names for each folder
         const fileNames = {
             'BendJava': [
                 '(How to Program) Paul Deitel, Harvey Deitel-Java How to Program, Early Objects-Pearson Education (2015) copy.pdf',
@@ -110,7 +177,6 @@
                 'DBMS-File 2-pages-2.pdf',
                 'DBMS-File 2-pages-3.pdf',
                 'DBMS-File 2-pages-4.pdf',
-                'DBMS-File 2-pages-5.pdf',
                 'Gate smashers dbms.pdf',
                 'sams_teach_yourself_sql_in_24_hours_5th_edition.pdf',
                 'SQL All-In-One For Dummies.pdf',
@@ -141,7 +207,13 @@
 
             if (selectedFolder && fileNames[selectedFolder]) {
                 const files = fileNames[selectedFolder];
+                const fileListElement = document.createElement('div');
+                fileListElement.classList.add('file-list');
                 
+                const heading = document.createElement('h3');
+                heading.textContent = `Files in ${selectedFolder}:`;
+                fileListElement.appendChild(heading);
+
                 const ul = document.createElement('ul');
                 files.forEach(fileName => {
                     const li = document.createElement('li');
@@ -162,11 +234,8 @@
                     ul.appendChild(li);
                 });
 
-                fileListContainer.appendChild(ul);
-
-                // Show file list and hide PDF container
-                fileListContainer.style.display = 'block';
-                document.getElementById('pdf-container').style.display = 'none';
+                fileListElement.appendChild(ul);
+                fileListContainer.appendChild(fileListElement);
             }
         }
 
@@ -181,21 +250,56 @@
         }
 
         function loadPDF() {
-    const pdfFile = document.getElementById('file-name-input').value.trim();
-    const folder = document.getElementById('folder-select').value;
-    
-    if (pdfFile) {
-        const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
-        document.getElementById('pdf-viewer').src = url;
-        document.getElementById('pdf-container').style.display = 'block'; // Show the PDF container
-        
-        // Hide input box and button
-        document.getElementById('input-container').style.display = 'none';
-    } else {
-        alert('Please paste a filename to open.');
-    }
-}
+            const pdfFile = document.getElementById('file-name-input').value.trim();
+            if (pdfFile) {
+                const folder = document.getElementById('folder-select').value;
+                const url = `https://siddhnak.github.io/${folder}/${pdfFile}`;
+                document.getElementById('pdf-viewer').src = url;
+                document.getElementById('pdf-container').style.display = 'block';
+            } else {
+                alert('Please paste a filename to open.');
+            }
+        }
 
+        // Rotating text script
+        let words = document.querySelectorAll(".word");
+        words.forEach(word => {
+            let letters = word.textContent.split("");
+            word.textContent = "";
+            letters.forEach(letter => {
+                let span = document.createElement("span");
+                span.textContent = letter;
+                span.className = "letter";
+                word.append(span);
+            });
+        });
+
+        let currentWordIndex = 0;
+        let maxWordIndex = words.length - 1;
+        words[currentWordIndex].style.opacity = "1";
+
+        let rotateText = () => {
+            let currentWord = words[currentWordIndex];
+            let nextWord =
+                currentWordIndex === maxWordIndex ? words[0] : words[currentWordIndex + 1];
+            Array.from(currentWord.children).forEach((letter, i) => {
+                setTimeout(() => {
+                    letter.className = "letter out";
+                }, i * 80);
+            });
+            nextWord.style.opacity = "1";
+            Array.from(nextWord.children).forEach((letter, i) => {
+                letter.className = "letter behind";
+                setTimeout(() => {
+                    letter.className = "letter in";
+                }, 340 + i * 80);
+            });
+            currentWordIndex =
+                currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
+        };
+
+        rotateText();
+        setInterval(rotateText, 4000);
     </script>
 </body>
 </html>
